@@ -9,7 +9,7 @@ services:
             - .:/var/www/html
         expose:
             - "9000"
-        entrypoint: ./config/docker/docker-entrypoint.sh
+        entrypoint: ./config/docker/php/docker-entrypoint.sh
     nginx:
         image: 4xxi/nginx:flex
         depends_on:

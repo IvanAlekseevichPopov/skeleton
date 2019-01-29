@@ -1,11 +1,11 @@
-FROM 4xxi/php-pgsql:flex
+FROM 4xxi/php:flex
 
-# To add additional packages and php extensions uncomment the following lines and add required dependencies
-# Check https://hub.docker.com/_/php/ for examples and documentation
+RUN apt-get update && apt-get install -y \
+    libpq-dev
 
-#RUN apt-get update && apt-get install -y \
-#    lib_name_1 \
-#    lib_name_2 \
-#    && docker-php-ext-install \
-#    ext_name_1 \
-#    ext_name_2
+RUN docker-php-ext-install \
+    pdo_pgsql
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    chmod +x /usr/local/bin/composer && \
+    composer global require hirak/prestissimo  --no-interaction
